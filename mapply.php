@@ -10,9 +10,8 @@ Author URI: http://www.mapply.net
 
 // Originally developed by Dann Blair
 // boldinnovationgroup.net
+// https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin
 
-// Defaults
-DEFINE("DEMOLP_HEADINGSTART", "<h4>Mapplyß</h4>");
 
 // Shortcodes
 add_shortcode("mapply", "mapply_handler");
@@ -20,16 +19,17 @@ add_shortcode("mapply", "mapply_handler");
 // Add actions
 add_action( 'wp_mapply_api', 'get_mapply_api' );
 add_action( 'wp_google_gapi', 'get_google_api' );
-
 add_action( 'wp_set_google_gapi', 'save_google_api' );
 add_action( 'wp_set_mapply_gapi', 'save_mapply_api' );
 
-// Install functions
+// Activiation Hook
 register_activation_hook( __FILE__, 'mapply_install' );
 
+// Install functions
 global $mapply_db_version;
 $mapply_db_version = "1.0";
 
+// Create the table to hold the API keys
 function mapply_install () {
    global $wpdb;
 
@@ -53,28 +53,45 @@ function mapply_install () {
   }
 }
 
+// Get the table prefix and return the name
 function get_table_name(){
   global $wpdb;
   return $wpdb->prefix . "mapply";
 }
 
 // End of Install functions
-
+// The function that actually handles replacing the short code
 function mapply_handler($incomingfrompost) {
 
+  $script_text = build_script_text();
+
   $incomingfrompost=shortcode_atts(array(
-    "headingstart" => DEMOLP_HEADINGSTART
+    "headingstart" => $script_text
   ), $incomingfrompost);
 
-  $demolph_output = demolistposts_function($incomingfrompost);
+  $demolph_output = script_output($incomingfrompost);
   return $demolph_output;
+}
+
+function build_script_text(){
+  $api = get_mapply_api();
+  $gapi = get_google_api();
+
+  $script = '<script id="locator" type="text/javascript" src="//app.mapply.net/front-end/js/locator.js" data-api-key="store_locator.';
+  $script .= $api;
+  $script .= '" data-path="//app.mapply.net/front-end/" data-maps-api-key="';
+  $script .= $gapi;
+  $script .= '" ></script>';
+
+  return $script;
 }
 
 function get_mapply_refferal_url(){
 
 }
 
-function demolistposts_function($incomingfromhandler) {
+// build the script to replace the short code
+function script_output($incomingfromhandler) {
   $demolp_output = wp_specialchars_decode($incomingfromhandler["headingstart"]);
   $demolp_output .= wp_specialchars_decode($incomingfromhandler["liststart"]);
 
@@ -91,29 +108,36 @@ function demolistposts_function($incomingfromhandler) {
   return $demolp_output;
 }
 
-// Save functions for API Keys
+// Save the mapply API key
 function save_mapply_api($api){
   global $wpdb;
-
+  $table_name = get_table_name();
+  $wpdb->insert( $table_name, array('mapply_api' => '$api'), array('%s','%d'));
 }
 
+// Save the Google API key
 function save_google_api($gapi){
   global $wpdb;
-
+  $table_name = get_table_name();
+  $wpdb->insert( $table_name, array('google_api' => '$gapi'), array('%s','%d'));
 }
 
+
+// Get the mapply api from the db
 function get_mapply_api(){
   global $wpdb;
-
-  $api = "";
-  return $api;
+  $table_name = get_table_name();
+  $api = $wpdb->get_row("SELECT mapply_api FROM ". $table_name ." WHERE id = 1", array());
+  return $api->mapply_api;
 }
 
+
+// Get the google API from the db
 function get_google_api(){
   global $wpdb;
-
-  $gapi = "";
-  return $gapi;
+  $table_name = get_table_name();
+  $gapi = $wpdb->get_row("SELECT google_api FROM ". $table_name ." WHERE id = 1", array());
+  return $gapi->google_api;
 }
 
 ?>
