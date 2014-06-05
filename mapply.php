@@ -13,10 +13,22 @@ Author URI: http://www.mapply.net
 // https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin
 
 
+// Save functions to catch the API keys
+if ($_POST){
+  if (isset($_POST['google_api_key'])){
+    save_google_api($_POST['google_api_key']);
+  }
+
+  if (isset($_POST['mapply_api_key'])){
+    save_mapply_api($_POST['mapply_api_key']);
+  }
+}
+
 // Shortcodes
 add_shortcode("mapply", "mapply_handler");
 
 // Add actions
+add_action('admin_menu', 'mapply_create_menu');
 add_action( 'wp_mapply_api', 'get_mapply_api' );
 add_action( 'wp_google_gapi', 'get_google_api' );
 add_action( 'wp_set_google_gapi', 'save_google_api' );
@@ -154,4 +166,47 @@ function get_google_api(){
   return $gapi->google_api;
 }
 
+// create custom plugin settings menu
+
+
+function mapply_create_menu() {
+
+	//create new top-level menu
+	add_menu_page('Mapply Settings', 'Mapply', 'administrator', __FILE__, 'mapply_settings_page',plugins_url('/images/icon.png', __FILE__));
+
+	//call register settings function
+	add_action( 'admin_init', 'register_mysettings' );
+}
+
+
+function register_mysettings() {
+	//register our settings
+	register_setting( 'mapply-settings-group', 'mapply_api_key' );
+	register_setting( 'mapply-settings-group', 'some_other_option' );
+}
+
+function mapply_settings_page() {
 ?>
+<div class="wrap">
+<h2>Mapply</h2>
+<p>Save your Mapply and Google API keys.
+<form method="post" action="mapply.php">
+    <?php settings_fields( 'baw-settings-group' ); ?>
+    <?php do_settings_sections( 'baw-settings-group' ); ?>
+    <table class="form-table">
+        <tr valign="top">
+        <th scope="row">Mapply API</th>
+        <td><input type="text" name="mapply_api_key" value="<?php echo get_option('mapply_api_key'); ?>" /></td>
+        </tr>
+
+        <tr valign="top">
+        <th scope="row">Google API</th>
+        <td><input type="text" name="google_api_key" value="<?php echo get_option('some_other_option'); ?>" /></td>
+        </tr>
+    </table>
+
+    <?php submit_button(); ?>
+
+</form>
+</div>
+<?php } ?>
