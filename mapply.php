@@ -48,8 +48,8 @@ function mapply_install () {
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
 
-    update_option( "mapply_db_version", $jal_db_version );
-
+    update_option( "mapply_db_version", $mapply_db_version );
+    create_first_row();
   }
 }
 
@@ -63,7 +63,17 @@ function get_table_name(){
 // The function that actually handles replacing the short code
 function mapply_handler($incomingfrompost) {
 
-  $script_text = build_script_text();
+  $api = get_mapply_api();
+  $gapi = get_google_api();
+  $script_text = "";
+
+  if ($api == "" || $gapi == ""){
+    $script_text = "<p>You need to save your Mapply API key and Google API key in the settings page.";
+  } else {
+    $script_text = build_script_text($api. $gapi);
+  }
+
+
 
   $incomingfrompost=shortcode_atts(array(
     "headingstart" => $script_text
@@ -73,10 +83,7 @@ function mapply_handler($incomingfrompost) {
   return $demolph_output;
 }
 
-function build_script_text(){
-  $api = get_mapply_api();
-  $gapi = get_google_api();
-
+function build_script_text($api, $gapi){
   $script = '<script id="locator" type="text/javascript" src="//app.mapply.net/front-end/js/locator.js" data-api-key="store_locator.';
   $script .= $api;
   $script .= '" data-path="//app.mapply.net/front-end/" data-maps-api-key="';
@@ -108,18 +115,24 @@ function script_output($incomingfromhandler) {
   return $demolp_output;
 }
 
+function create_first_row(){
+  global $wpdb;
+  $table_name = get_table_name();
+  $wpdb->insert( $table_name, array('mapply_api' => '', 'google_api' => ''), array());
+}
+
 // Save the mapply API key
 function save_mapply_api($api){
   global $wpdb;
   $table_name = get_table_name();
-  $wpdb->insert( $table_name, array('mapply_api' => '$api'), array('%s','%d'));
+  $wpdb->insert( $table_name, array('mapply_api' => '$api'), array());
 }
 
 // Save the Google API key
 function save_google_api($gapi){
   global $wpdb;
   $table_name = get_table_name();
-  $wpdb->insert( $table_name, array('google_api' => '$gapi'), array('%s','%d'));
+  $wpdb->insert( $table_name, array('google_api' => '$gapi'), array());
 }
 
 
