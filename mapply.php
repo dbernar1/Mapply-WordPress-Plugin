@@ -88,12 +88,14 @@ function mapply_handler($incomingfrompost) {
 function build_script_text(){
   $api = get_mapply_api();
   $gapi = get_google_api();
+  $mapply_link = get_mapply_refferal_url();
 
   $script = '<script id="locator" type="text/javascript" src="//app.mapply.net/front-end/js/locator.js" data-api-key="store_locator.';
   $script .= $api;
   $script .= '" data-path="//app.mapply.net/front-end/" data-maps-api-key="';
   $script .= $gapi;
   $script .= '" ></script>';
+  $script .= $mapply_link;
 
   return $script;
 }
@@ -116,6 +118,7 @@ function script_output($incomingfromhandler) {
   return $demolp_output;
 }
 
+// Create the row to store the keys
 function create_first_row(){
   global $wpdb;
   $table_name = get_table_name();
@@ -129,6 +132,7 @@ function save_mapply_api($api){
   $wpdb->query($wpdb->prepare("UPDATE ".$table_name." SET mapply_api='$api' WHERE id=1"));
 }
 
+// Save the refferal link to mapply
 function save_mapply_link($link){
   global $wpdb;
   $table_name = get_table_name();
@@ -160,6 +164,7 @@ function get_google_api(){
   return $gapi->google_api;
 }
 
+// Get the refferal link from the database
 function get_mapply_refferal_url(){
   global $wpdb;
   $table_name = get_table_name();
@@ -167,20 +172,28 @@ function get_mapply_refferal_url(){
   return $href->mapply_link;
 }
 
+// Process the form data
 function process_mapply_keys(){
-
   if ($_POST){
+
+    // Check for the google api key
     if (isset($_POST['google_api_key'])){
       save_google_api(sanitize_text_field($_POST['google_api_key']));
     }
 
+    // Check for the apply api key
     if (isset($_POST['mapply_api_key'])){
       save_mapply_api(sanitize_text_field($_POST['mapply_api_key']));
     }
 
+    // Check if the mapply link was posted
     if (isset($_POST['mapply_link'])){
-      save_mapply_link(sanitize_text_field($_POST['mapply_api_link']));
+      save_mapply_link(sanitize_text_field($_POST['mapply_link']));
     }
+
+    // redirect
+    wp_redirect(  admin_url( 'admin.php?page=mapply.php_/mapply.php' ) );
+    exit;
   }
 }
 
@@ -201,10 +214,14 @@ function register_mysettings() {
 }
 
 function mapply_settings_page() {
+  $default_link = "<a href='http://mapply.net'>Mapply by Mapply!</a>";
 ?>
 <script>
 jQuery(document).ready({
-  jQuery("#mapply_api_box").unbind();
+  jQuery("#mapply_api_box").change(function(){
+    alert(jQuery(this).val());
+    // jQuery("#mapply_link_box").val("api");
+  })
 
 })
 
@@ -219,6 +236,7 @@ function get_key(){
     <?php settings_fields( 'baw-settings-group' ); ?>
     <?php do_settings_sections( 'baw-settings-group' ); ?>
     <input type="hidden" name="action" value="mapply_api_keys" />
+    <input id="mapply_link_box" style="display:none" type="text" name="mapply_link" value="<?php echo $default_link ?>" />
     <table class="form-table">
         <tr valign="top">
         <th scope="row">Mapply API</th>
