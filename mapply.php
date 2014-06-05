@@ -36,14 +36,14 @@ function mapply_install () {
    $installed_ver = get_option( "mapply_db_version" );
    $table_name = get_table_name();
 
-  if( $installed_ver != $mapply_db_version ) {
+  if( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name || $installed_ver != $mapply_db_version ) {
 
-    $sql = "CREATE TABLE $table_name (
+    $sql = 'CREATE TABLE ' .$table_name. ' (
       id mediumint(9) NOT NULL AUTO_INCREMENT,
-      mapply_api VARCHAR(255) DEFAULT '' NOT NULL,
-      google_api VARCHAR(255) DEFAULT '' NOT NULL,
+      mapply_api VARCHAR(255) DEFAULT "" NOT NULL,
+      google_api VARCHAR(255) DEFAULT "" NOT NULL,
       UNIQUE KEY id (id)
-    );";
+    );';
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
@@ -70,10 +70,8 @@ function mapply_handler($incomingfrompost) {
   if ($api == "" || $gapi == ""){
     $script_text = "<p>You need to save your Mapply API key and Google API key in the settings page.";
   } else {
-    $script_text = build_script_text($api. $gapi);
+    $script_text = build_script_text();
   }
-
-
 
   $incomingfrompost=shortcode_atts(array(
     "headingstart" => $script_text
@@ -83,7 +81,10 @@ function mapply_handler($incomingfrompost) {
   return $demolph_output;
 }
 
-function build_script_text($api, $gapi){
+function build_script_text(){
+  $api = get_mapply_api();
+  $gapi = get_google_api();
+
   $script = '<script id="locator" type="text/javascript" src="//app.mapply.net/front-end/js/locator.js" data-api-key="store_locator.';
   $script .= $api;
   $script .= '" data-path="//app.mapply.net/front-end/" data-maps-api-key="';
@@ -125,14 +126,14 @@ function create_first_row(){
 function save_mapply_api($api){
   global $wpdb;
   $table_name = get_table_name();
-  $wpdb->insert( $table_name, array('mapply_api' => '$api'), array());
+  $wpdb->query($wpdb->prepare("UPDATE ".$table_name." SET mapply_api='$api' WHERE id=1"));
 }
 
 // Save the Google API key
 function save_google_api($gapi){
   global $wpdb;
   $table_name = get_table_name();
-  $wpdb->insert( $table_name, array('google_api' => '$gapi'), array());
+  $wpdb->query($wpdb->prepare("UPDATE ".$table_name." SET google_api='$gapi' WHERE id=1"));
 }
 
 
@@ -140,7 +141,7 @@ function save_google_api($gapi){
 function get_mapply_api(){
   global $wpdb;
   $table_name = get_table_name();
-  $api = $wpdb->get_row("SELECT mapply_api FROM ". $table_name ." WHERE id = 1", array());
+  $api = $wpdb->get_row( $wpdb->prepare( "SELECT mapply_api FROM " .$table_name. " WHERE ID = 1" ));
   return $api->mapply_api;
 }
 
@@ -149,7 +150,7 @@ function get_mapply_api(){
 function get_google_api(){
   global $wpdb;
   $table_name = get_table_name();
-  $gapi = $wpdb->get_row("SELECT google_api FROM ". $table_name ." WHERE id = 1", array());
+  $gapi = $wpdb->get_row( $wpdb->prepare( "SELECT google_api FROM " .$table_name. " WHERE ID = 1" ));
   return $gapi->google_api;
 }
 
