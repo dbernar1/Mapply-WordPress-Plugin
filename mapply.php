@@ -25,16 +25,16 @@ add_action( 'wp_set_google_gapi', 'save_google_api' );
 add_action( 'wp_set_mapply_gapi', 'save_mapply_api' );
 
 // Install functions
-register_activation_hook( __FILE__, 'jal_install' );
+register_activation_hook( __FILE__, 'mapply_install' );
 
 global $mapply_db_version;
 $mapply_db_version = "1.0";
 
-function jal_install () {
+function mapply_install () {
    global $wpdb;
 
    $installed_ver = get_option( "mapply_db_version" );
-   $table_name = $wpdb->prefix . "mapply";
+   $table_name = get_table_name();
 
   if( $installed_ver != $mapply_db_version ) {
 
@@ -51,6 +51,11 @@ function jal_install () {
     update_option( "mapply_db_version", $jal_db_version );
 
   }
+}
+
+function get_table_name(){
+  global $wpdb;
+  return $wpdb->prefix . "mapply";
 }
 
 // End of Install functions
