@@ -188,7 +188,7 @@ function process_mapply_keys(){
 
     // Check if the mapply link was posted
     if (isset($_POST['mapply_link'])){
-      save_mapply_link(sanitize_text_field($_POST['mapply_link']));
+      save_mapply_link($_POST['mapply_link']);
     }
 
     // redirect
@@ -213,22 +213,10 @@ function register_mysettings() {
   register_setting( 'mapply-settings-group', 'some_other_option' );
 }
 
+// Build the settings page
 function mapply_settings_page() {
   $default_link = "<a href='http://mapply.net'>Mapply by Mapply!</a>";
 ?>
-<script>
-jQuery(document).ready({
-  jQuery("#mapply_api_box").change(function(){
-    alert(jQuery(this).val());
-    // jQuery("#mapply_link_box").val("api");
-  })
-
-})
-
-function get_key(){
-
-}
-</script>
 <div class="wrap">
 <h2>Mapply</h2>
 <p>Save your Mapply and Google API keys.
