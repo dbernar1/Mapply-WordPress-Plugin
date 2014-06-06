@@ -14,10 +14,9 @@ Shortcode:
 [mapply]
 </pre>
 
-The plugin will replace the shortcode with the standard mapply JavaScript snippet.
-<pre>
-<script id="locator" type="text/javascript" src="//app.mapply.net/front-end/js/locator.js" data-api-key="store_locator.[Mapply_API]" data-path="//app.mapply.net/front-end/" data-maps-api-key="[Google_API]" ></script>
-</pre>
+Download
+--------
+You can download this plugin directly right <a href="https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin/archive/master.zip">here</a>. You will need to upload the zip archive to your WordPress site through the plugin manager in the admin dashboard.
 
 FAQ
 ---
