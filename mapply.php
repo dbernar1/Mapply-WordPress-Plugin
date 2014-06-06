@@ -216,6 +216,9 @@ function register_mysettings() {
 // Build the settings page
 function mapply_settings_page() {
   $default_link = "<a href='http://mapply.net'>Mapply by Mapply!</a>";
+
+  $api = get_mapply_api();
+  $gapi = get_google_api();
 ?>
 <div class="wrap">
 <h2>Mapply</h2>
@@ -228,12 +231,12 @@ function mapply_settings_page() {
     <table class="form-table">
         <tr valign="top">
         <th scope="row">Mapply API</th>
-        <td><input id="mapply_api_box" type="text" name="mapply_api_key" value="<?php echo get_option('mapply_api_key'); ?>" /></td>
+        <td><input id="mapply_api_box" type="text" name="mapply_api_key" value="<?php echo $api ?>" /></td>
         </tr>
 
         <tr valign="top">
         <th scope="row">Google API</th>
-        <td><input type="text" name="google_api_key" value="<?php echo get_option('some_other_option'); ?>" /></td>
+        <td><input type="text" name="google_api_key" value="<?php echo $gapi ?>" /></td>
         </tr>
     </table>
 
