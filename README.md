@@ -2,7 +2,7 @@
 Mapply-WordPress-Plugin
 =======================
 
-A plugin that adds your mapply map to your WordPress website via shortcode. Sign up for your Mapply free trial on <a href="http://mapply.net">Mapply.net</a>. Once you have signed up you will need your API key and a Google Maps API key. 
+A plugin that adds your mapply map to your WordPress website via shortcode. Sign up for your Mapply free trial on <a href="http://mapply.net">Mapply.net</a>. Once you have signed up you will need your API key and a Google Maps API key.
 
 Usage
 ------
@@ -16,7 +16,7 @@ Shortcode:
 
 Download
 --------
-You can download this plugin directly right <a href="https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin/archive/master.zip">here</a>. You will need to upload the zip archive to your WordPress site through the plugin manager in the admin dashboard.
+You can download this plugin directly right <a href="https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin/archive/master.zip">here</a>. You will need to unzip the main archive and grab mapply.zip to upload to your WordPress site through the plugin manager in the admin dashboard.
 
 FAQ
 ---
