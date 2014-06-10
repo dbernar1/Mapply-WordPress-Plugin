@@ -16,7 +16,7 @@ Shortcode:
 
 Download
 --------
-You can download this plugin directly right <a href="https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin/archive/master.zip">here</a>. You will need to unzip the main archive and grab mapply.zip to upload to your WordPress site through the plugin manager in the admin dashboard.
+You can download this plugin directly right <a href="https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin/raw/master/mapply.zip">here</a>. You will need to unzip the main archive and grab mapply.zip to upload to your WordPress site through the plugin manager in the admin dashboard.
 
 FAQ
 ---
