@@ -47,7 +47,7 @@ function mapply_install () {
       mapply_api VARCHAR(255) DEFAULT "" NOT NULL,
       google_api VARCHAR(255) DEFAULT "" NOT NULL,
       mapply_link VARCHAR(255) DEFAULT "",
-      display_refferal INT(1) DEFAULT "1" NOT NULL,
+      display_refferal INT(1) DEFAULT "0" NOT NULL,
       UNIQUE KEY id (id)
     );';
 

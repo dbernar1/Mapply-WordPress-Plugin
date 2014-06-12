@@ -4,7 +4,7 @@
 function create_first_row(){
   global $wpdb;
   $table_name = get_table_name();
-  $wpdb->insert( $table_name, array('mapply_api' => '', 'google_api' => '', 'display_refferal' => '1'), array());
+  $wpdb->insert( $table_name, array('mapply_api' => '', 'google_api' => '', 'display_refferal' => '0'), array());
 }
 
 // Save the mapply API key

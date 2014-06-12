@@ -4,19 +4,21 @@
 function mapply_settings_page() {
   $default_link = "<a href='http://mapply.net'>Mapply by Mapply!</a>";
 
-  $image = WP_PLUGIN_URL . '/mapply/images/logo.png';
-  $styles = WP_PLUGIN_URL . '/mapply/css/mapply_styles.css';
+  $image    = WP_PLUGIN_URL . '/mapply/images/logo.png';
+  $nav_bg   = WP_PLUGIN_URL . '/mapply/images/banner-bg.jpg';
+  $styles   = WP_PLUGIN_URL . '/mapply/css/mapply_styles.css';
+  $semantic = WP_PLUGIN_URL . 'mapply/css/semantic.css'
 
-  $api = get_mapply_api();
-  $gapi = get_google_api();
+  $api         = get_mapply_api();
+  $gapi        = get_google_api();
   $display_ref = get_display_ref();
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/css/semantic.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $semantic ?>"/>
 <link rel="stylesheet" type="text/css" href="<?php echo $styles ?>"/>
 
-<div class="navbar">
+<div class="navbar" style="background: url('<?php echo $nav_bg ?>') center center #757994 no-repeat;">
     <a class="logo" href="http://mapply.net" target="_blank"><img src="https://app.mapply.net/assets/imgs/logo.png" width="150"></a>
 </div>
 
