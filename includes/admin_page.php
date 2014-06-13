@@ -5,6 +5,7 @@ function mapply_settings_page() {
   $default_link = "<a href='http://mapply.net'>Mapply by Mapply!</a>";
 
   $image    = WP_PLUGIN_URL . '/mapply/images/logo.png';
+  $image2   = WP_PLUGIN_URL . '/mapply/images/logo2.png';
   $nav_bg   = WP_PLUGIN_URL . '/mapply/images/banner-bg.jpg';
   $styles   = WP_PLUGIN_URL . '/mapply/css/mapply_styles.css';
   $semantic = WP_PLUGIN_URL . 'mapply/css/semantic.css'
@@ -19,7 +20,7 @@ function mapply_settings_page() {
 <link rel="stylesheet" type="text/css" href="<?php echo $styles ?>"/>
 
 <div class="navbar" style="background: url('<?php echo $nav_bg ?>') center center #757994 no-repeat;">
-    <a class="logo" href="http://mapply.net" target="_blank"><img src="https://app.mapply.net/assets/imgs/logo.png" width="150"></a>
+    <a class="logo" href="http://mapply.net" target="_blank"><img src="<?php echo $image2 ?>" width="150"></a>
 </div>
 
 <div class="wrap ui segment purple">
