@@ -7,7 +7,7 @@ A plugin that adds your mapply map to your WordPress website via shortcode. Sign
 Usage
 ------
 In order to use the Mapply WordPress plugin you will need to save your Mapply API key (found in your Mapply settings).
-You will need to save these keys in the settings page in your WordPress admin dashboard. 
+You will need to save these keys in the settings page in your WordPress admin dashboard.
 
 <img src="assets/screenshot-1.png">
 
@@ -18,13 +18,13 @@ Shortcode:
 [mapply]
 </pre>
 
-Mapply will appear on your website wherever you have added the Shortcode. 
+Mapply will appear on your website wherever you have added the Shortcode.
 
 <img src="assets/screenshot-2.png">
 
 Download
 --------
-You can download this plugin directly right <a href="https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin/raw/master/mapply.zip">here</a>. You will need to unzip the main archive and grab mapply.zip to upload to your WordPress site through the plugin manager in the admin dashboard.
+Mapply is availble on the WordPress.org plugin directory right <a href="http://wordpress.org/plugins/mapply/">here</a>. You can download this plugin directly right <a href="https://github.com/BOLDInnovationGroup/Mapply-WordPress-Plugin/raw/master/mapply.zip">here</a>. You will need to unzip the main archive and grab mapply.zip to upload to your WordPress site through the plugin manager in the admin dashboard.
 
 FAQ
 ---
