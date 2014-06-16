@@ -11,7 +11,7 @@ Mapply is a service that allows you to plot your physical store location on a ma
 
 == Description ==
 
-Mapply is a powerful, yet simple app that allows you to easily embed a Store or Dealer Locator tool on your own website to help your customers find you! It is free to try for 30 days and can be setup in under 10 minutes by copying & pasting a single line of code!
+Mapply is a powerful and simple app that allows you to easily embed a Store or Dealer Locator tool on your own website to help your customers find you! It is free to try for 30 days and can be setup in under 10 minutes by copying & pasting a single line of code!
 
 Mapply is fully customizable - Customize the look and feel of the Mapply with easy to use settings. Font & button colors, drop pin color, map size, original map location, and much more. You can even customize all of the descriptions and text to exactly what you want, or to any language!
 
