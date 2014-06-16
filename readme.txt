@@ -1,6 +1,6 @@
 === Plugin Name ===
-Contributors: CMDann, BoldDann
-Tags: Maps, Store, Commerce, eCommerce, World
+Contributors: CMDann, BoldDann, tysonkroeker
+Tags: Maps, Store, Commerce, eCommerce, World, Dealer, Locator, Store Locator, Google Maps, Google, Map, Mapply, Mapp, Bold, Apps
 Requires at least: 3.0.1
 Tested up to: 3.4
 Stable tag: 4.3
