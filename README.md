@@ -1,4 +1,4 @@
-<a href="http://mapply.net"><img src="http://mapply.net/img/logo.png" /></a>
+<a href="http://mapply.net"><img src="assets/banner-772x250.png" /></a>
 Mapply-WordPress-Plugin
 =======================
 
