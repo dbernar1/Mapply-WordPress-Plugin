@@ -30,8 +30,7 @@ add_action( 'admin_post_mapply_api_keys', 'process_mapply_keys' );
 register_activation_hook( __FILE__, 'mapply_install' );
 
 // Install functions
-global $mapply_db_version;
-$mapply_db_version = "1.0";
+define( 'MAPPLY_DB_VERSION', '1.0' );
 
 // Create the table to hold the API keys
 function mapply_install () {
@@ -40,7 +39,7 @@ function mapply_install () {
    $installed_ver = get_option( "mapply_db_version" );
    $table_name = get_table_name();
 
-  if( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name || $installed_ver != $mapply_db_version ) {
+  if( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name || $installed_ver != MAPPLY_DB_VERSION ) {
 
     $sql = 'CREATE TABLE ' .$table_name. ' (
       id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -53,7 +52,7 @@ function mapply_install () {
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
-    update_option( "mapply_db_version", $mapply_db_version );
+    update_option( "mapply_db_version", MAPPLY_DB_VERSION );
     create_first_row();
   }
 }
