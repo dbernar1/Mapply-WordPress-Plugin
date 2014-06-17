@@ -29,7 +29,7 @@ function mapply_settings_page() {
 <hr>
 <div class="instructions">
   <p><b>Step 1</b> - First we'll need to have a Mapply account. If you don't have one already, you can sign up for a <a href="http://www.mapply.net">free 30 day trial here</a>! :-)</p>
-  <p><b>Step 2</b> - Once you're signed up and inside your Mapply account, navigate to the <a href="#">API setup page</a> to grap your Mapply and Google Map API keys to populate the fields below.</p>
+  <p><b>Step 2</b> - Once you're signed up and inside your Mapply account, navigate to the <a href="#">API setup page</a> to grab your Mapply and Google Map API keys to populate the fields below.</p>
   <p><b>Step 3</b> - Once you have all of your <a href="http://www.app.mapply.net">stores setup</a> in your Mapply account, you can insert your map on any page by using the <b>[mapply]</b> shortcode.</p>
 </div>
 
