@@ -111,6 +111,3 @@ function process_mapply_keys(){
     exit;
   }
 }
-
-
-?>

@@ -147,5 +147,3 @@ function register_mysettings() {
 // Require the important files
 require("includes/functions.php");
 require("includes/admin_page.php");
-
-?>
