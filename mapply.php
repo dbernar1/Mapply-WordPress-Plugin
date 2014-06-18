@@ -126,22 +126,9 @@ function script_output($incomingfromhandler) {
 
 // Create the admin menu
 function mapply_create_menu() {
-
   //create new top-level menu
   add_menu_page('Mapply Settings', 'Mapply', 'administrator', __FILE__, 'mapply_settings_page',plugins_url('/images/icon.png', __FILE__));
-
-  //call register settings function
-  add_action( 'admin_init', 'register_mysettings' );
-
 }
-
-function register_mysettings() {
-  //register our settings
-  register_setting( 'mapply-settings-group', 'mapply_api_key' );
-  register_setting( 'mapply-settings-group', 'some_other_option' );
-
-}
-
 
 // Require the important files
 require("includes/functions.php");
