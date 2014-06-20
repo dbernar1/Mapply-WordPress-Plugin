@@ -35,9 +35,6 @@ function mapply_settings_page() {
 
 <form method="post" action="admin-post.php">
 
-    <?php settings_fields( 'baw-settings-group' ); ?>
-    <?php do_settings_sections( 'baw-settings-group' ); ?>
-
     <input type="hidden" name="action" value="mapply_api_keys" />
     <input id="mapply_link_box" style="display:none" type="text" name="mapply_link" value="<?php echo $default_link ?>" />
     <table class="form-table">
